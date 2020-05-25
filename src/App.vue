@@ -10,10 +10,14 @@ export default {
   components: {},
   data() {
     return {
-      age: 30,
-      data: ""
+      res: {},
     };
-  }
+  },
+  mounted() {
+    this.axios.get("/mock/user/login.json").then((res) => {
+      this.res = res;
+    });
+  },
 };
 </script>
 
