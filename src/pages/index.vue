@@ -1,12 +1,17 @@
 <template>
   <div>
-    index
+    <service-bar></service-bar>
   </div>
 </template>
 
 <script>
-export default {
-  name: "nav-home",
-};
+  import serviceBar from "../components/ServiceBar";
+
+  export default {
+    name: "index",
+    components: {
+      // eslint-disable-next-line vue/no-unused-components
+      serviceBar
+    },
+  };
 </script>
->

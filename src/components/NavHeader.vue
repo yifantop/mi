@@ -197,7 +197,7 @@
             display: inline-block;
             width: 16px;
             height: 12px;
-            background: url("/imgs/icon-cart-checked.png") no-repeat center;
+            background: url("./../../public/imgs/icon-cart-checked.png") no-repeat center;
             background-size: contain;
             margin-right: 4px;
           }
@@ -229,7 +229,7 @@
               display: inline-block;
               width: 55px;
               height: 55px;
-              background: url("/imgs/mi-logo.png") no-repeat center;
+              background: url("./../../public/imgs/mi-logo.png") no-repeat center;
               background-size: 55px;
               transition: margin 0.2s;
             }
@@ -239,7 +239,7 @@
               display: inline-block;
               width: 55px;
               height: 55px;
-              background: url("/imgs/mi-home.png") no-repeat center;
+              background: url("./../../public/imgs/mi-home.png") no-repeat center;
               background-size: 55px;
             }
 
@@ -288,6 +288,7 @@
               box-shadow: 0px 7px 6px 0px rgba(0, 0, 0, 0.11);
               z-index: 10;
               transition: all 0.5s;
+              background-color: #ffffff;
 
               .product {
                 position: relative;
@@ -363,7 +364,7 @@
               display: inline-block;
               width: 18px;
               height: 18px;
-              background: url("/imgs/icon-search.png") no-repeat center;
+              background: url("./../../public/imgs/icon-search.png") no-repeat center;
               background-size: contain;
               margin-left: 17px;
             }
