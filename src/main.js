@@ -1,6 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
+import VueLazyload from "vue-lazyload";
 import axios from "axios";
 import VueAxios from "vue-axios";
 // import env from "./env";
@@ -23,6 +24,9 @@ axios.interceptors.response.use(function(response) {
   }
 });
 Vue.use(VueAxios, axios);
+Vue.use(VueLazyload, {
+  loading: '/imgs/loading-svg/loading-bars.svg'
+});
 Vue.config.productionTip = false;
 
 new Vue({
