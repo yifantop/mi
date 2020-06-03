@@ -220,7 +220,6 @@
     .footor {
       height: 391px;
       width: 100%;
-      border: 1px solid red;
       text-align: center;
 
       span {
