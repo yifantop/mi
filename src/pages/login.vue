@@ -122,12 +122,12 @@
     .body {
       .container {
         position: relative;
-        width: 1530px;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
 
         img {
-          width: 1530px;
+          width: 100%;
         }
 
         .login-form {
@@ -219,6 +219,7 @@
 
     .footor {
       height: 391px;
+      border: 1px solid white;
       width: 100%;
       text-align: center;
 
