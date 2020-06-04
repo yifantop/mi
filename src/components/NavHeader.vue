@@ -11,11 +11,16 @@
         <div class="topbar-user">
           <a href="javascript:;" v-if="userName">{{ userName }}</a>
           <a href="javascript:;" @click="login" v-else>登录</a>
-          <a href="javascript:;" v-if="userName">退出</a>
+          <a href="javascript:;" v-if="userName" @click="logout">退出</a>
           <a href="javascript:;" v-else>我的订单</a>
-          <a href="javascript:;" class="my-cart"
-          ><span class="icon-cart" @click="goToCart"></span> 购物车({{cartCount}})</a
-          >
+          <a href="javascript:;" class="my-cart">
+            <span class="icon-cart" @click="goToCart">
+            </span>
+            购物车
+            <span v-if="userName">
+              ({{cartCount}})
+            </span>
+          </a>
         </div>
       </div>
     </div>
@@ -122,7 +127,7 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex';
+  import {mapState, mapActions} from 'vuex';
   export default {
     name: "nav-header",
     data() {
@@ -150,6 +155,9 @@
     },
 
     methods: {
+      ...mapActions({
+        removeUserName: 'removeUserName',
+      }),
       getProductList() {
         this.axios
           .get("/products", {
@@ -169,6 +177,9 @@
       goToCart() {
         this.$router.push("/cart");
       },
+      logout() {
+        this.removeUserName();
+      }
     },
   };
 </script>

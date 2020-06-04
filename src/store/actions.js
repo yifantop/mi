@@ -4,5 +4,8 @@ export default {
   },
   saveCartCount(context, cartCount) {
     context.commit('saveCartCount', cartCount);
-  }
+  },
+  removeUserName(context) {
+    context.commit('removeUserName');
+  },
 }
