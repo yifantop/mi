@@ -15,3 +15,9 @@
   background: url($img) no-repeat center;
   background-size: $size;
 }
+
+@mixin flex($hov: space-between, $col: center) {
+  display: flex;
+  justify-content: $hov;
+  align-items: $col;
+}
