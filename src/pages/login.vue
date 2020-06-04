@@ -21,12 +21,12 @@
           </div>
           <div v-if="loginWay === 0">
             <div class="in">
-              <input type="text" placeholder="邮箱/手机号码/小米ID" onautocomplete="off">
-              <input type="password" placeholder="密码" onautocomplete="off">
-              <button>登录</button>
+              <input type="text" placeholder="邮箱/手机号码/小米ID" onautocomplete="off" v-model="username">
+              <input type="password" placeholder="密码" onautocomplete="off" v-model="password">
+              <button @click="login">登录</button>
             </div>
             <div class="foot">
-              <span class="foot-1">手机短信登录/注册</span>
+              <span class="foot-1" @click="register">手机短信登录/注册</span>
               <span class="foot-2">立即注册 | 忘记密码？</span>
             </div>
           </div>
@@ -44,15 +44,27 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
+
   export default {
     name: 'login',
     data() {
       return {
         // 登录方式，0是账号登录，1是扫码登录
         loginWay: 0,
+        // 用户名
+        username: '',
+        // 密码
+        password: '',
+        // 用户id，用来告诉后端当前用户是谁
+        userId: '',
+
       }
     },
     methods: {
+      ...mapActions({
+        saveUserName: 'saveUserName',
+      }),
       changeLoginWayAccount() {
         this.loginWay = 0;
         let account = document.getElementsByClassName("account")[0];
@@ -66,6 +78,27 @@
         let wash = document.getElementsByClassName("wash")[0];
         account.style.color = "#666666";
         wash.style.color = "#ff6600";
+      },
+      login() {
+        let {username, password} = this;
+        this.axios.post('/user/login', {
+          username,
+          password
+        }).then((res) => {
+          // 将当前登录的用户存储下来，过期时间一个月
+          this.$cookie.set('userId', res.id, {expires: '1M'});
+          this.saveUserName(res.username);
+          this.$router.push('/index');
+        })
+      },
+      register() {
+        this.axios.post('/user/register', {
+          username: 'zhuoyifan',
+          password: 'zhuoyifan',
+          email: 'zhuoyifan@163.com'
+        }).then(() => {
+          alert('注册成功');
+        })
       }
     }
   }
@@ -186,6 +219,7 @@
             }
 
             button {
+              cursor: pointer;
               width: 350px;
               height: 50px;
               margin-top: 10px;
@@ -207,6 +241,7 @@
 
             span:first-child {
               color: #ff6600;
+              cursor: pointer;
             }
 
             span:last-child {

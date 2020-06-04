@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import VueLazyload from "vue-lazyload";
 import axios from "axios";
+import VueCookie from "vue-cookie";
 import store from "./store"
 import VueAxios from "vue-axios";
 // import env from "./env";
@@ -15,15 +16,21 @@ axios.defaults.timeout = 8000;
 // 拦截代码
 axios.interceptors.response.use(function(response) {
   let res = response.data;
-  if (res.status == 0) {
+  let path = location.hash;
+  console.log(res);
+  if (res.status === 0) {
     return res.data;
-  } else if (res.status == 10) {
-    window.location.href = "/#/login";
+  } else if (res.status === 10) {
+    if (path !== '#/index') {
+      window.location.href = "/#/login";
+    }
   } else {
     // 后续会用element改掉
     alert(res.msg);
+    return Promise.reject(res);
   }
 });
+Vue.use(VueCookie);
 Vue.use(VueAxios, axios);
 Vue.use(VueLazyload, {
   loading: '/imgs/loading-svg/loading-bars.svg'

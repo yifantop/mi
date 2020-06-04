@@ -5,6 +5,7 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
 export default {
   name: "App",
   components: {},
@@ -13,7 +14,26 @@ export default {
       res: {},
     };
   },
-  mounted() {},
+  mounted() {
+    this.getUser();
+    this.getCartCount();
+  },
+  methods: {
+    ...mapActions({
+      saveUserName: 'saveUserName',
+      saveCartCount: 'saveCartCount'
+    }),
+    getUser() {
+      this.axios.get('/user').then((res) => {
+        this.saveUserName(res.username);
+      })
+    },
+    getCartCount() {
+      this.axios.get('/carts/products/sum').then((res) => {
+        this.saveCartCount(res);
+      })
+    }
+  }
 };
 </script>
 

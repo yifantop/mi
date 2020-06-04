@@ -11,10 +11,10 @@
         <div class="topbar-user">
           <a href="javascript:;" v-if="userName">{{ userName }}</a>
           <a href="javascript:;" @click="login" v-else>登录</a>
-          <a href="javascript:;" v-if="userName">注册</a>
+          <a href="javascript:;" v-if="userName">退出</a>
           <a href="javascript:;" v-else>我的订单</a>
           <a href="javascript:;" class="my-cart"
-          ><span class="icon-cart" @click="goToCart"></span> 购物车</a
+          ><span class="icon-cart" @click="goToCart"></span> 购物车({{cartCount}})</a
           >
         </div>
       </div>
@@ -122,13 +122,19 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex';
   export default {
     name: "nav-header",
     data() {
       return {
-        userName: "",
         phoneList: [],
       };
+    },
+    computed: {
+      ...mapState({
+        userName: state => state.userName,
+        cartCount: state => state.cartCount
+      })
     },
     filters: {
       currency(val) {
